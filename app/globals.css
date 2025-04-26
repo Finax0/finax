@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background-light: #f2f2f2;
+    --foreground-light: #f5f5f5;
+    --text-primary-light: #222222;
+    --text-secondary-light: #6a7080;
+    --accent-light: #e63946;
+
+    --background-dark: #111111;
+    --foreground-dark: #2f2f2f;
+    --text-primary-dark: #f2f2f2;
+    --text-secondary-dark: #bbbbbb;
+    --accent-dark: #ff6b6b;
+    --font-poppins: 'Poppins', sans-serif;
+
+    /* Default light theme */
+    --background: var(--background-light);
+    --foreground: var(--foreground-light);
+    --brand-primary: #c9721f;
+    --brand-secondary: #13558d;
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --accent: var(--accent-light);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Light theme */
+body {
+    background: var(--background-light);
+    color: var(--text-primary-light);
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme */
+body.dark {
+    background: var(--background-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Add dark colors for specific text/element */
+body.dark {
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent: var(--accent-dark);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: var(--background-dark);
+        --foreground: var(--foreground-dark);
+        --text-primary: var(--text-primary-dark);
+        --text-secondary: var(--text-secondary-dark);
+        --accent: var(--accent-dark);
+    }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.animate-slideUp {
+    animation: slideUp 0.3s ease-in-out forwards;
+}
+
+.animate-slideDown {
+    animation: slideDown 0.2s ease-in-out forwards;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.animate-fadeOut {
+    animation: fadeOut 0.3s ease-in-out forwards;
 }
