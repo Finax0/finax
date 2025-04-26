@@ -3,10 +3,12 @@ import { useState } from "react";
 import Header from "@/components/header";
 import Link from "next/link";
 import Globe from "@/public/icons/globe.svg"
+import Creditlogin from "../creditlogin/page";
 
 
 export default function signUp() {
     const [loading, setLoading] = useState(false);
+    const [gidermisin, setGidermisin] = useState(false);
     const [errors, setErrors] = useState<Record<string, string | null>>({});
     const [formData, setFormData] = useState({
         "email": "",
@@ -144,13 +146,48 @@ export default function signUp() {
 
 
                     {/* Submit Button */}
-                    <Link
-                        href="/creditlogin"
-                        type="submit"
+                    <div 
+                        onClick={()=> setGidermisin(true)}
                         className="w-full bg-[#2f2f2f] text-[#f5f5f5] font-bold p-2 rounded-lg hover:opacity-80 text-center flex items-center justify-center"
                     >
                         Sign Up
-                    </Link>
+                    </div>
+                    {gidermisin && (
+                                <>
+                                    <div 
+                                    className="fixed inset-0 bg-black/50 z-40"
+                                    onClick={() => setGidermisin(false)}
+                                    />
+                                    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border p-6 rounded-2xl shadow-2xl z-50 w-96 text-center space-y-5">
+
+                                    <p className="text-xl font-semibold text-gray-800">Nasıl devam etmek istersin?</p>
+                                    <div className="border-b-2  w-64 mx-auto my-4" style={{ borderColor: "#8ec291" }}></div> {/* Artık daha fazla boşluk var */}
+
+                                    <Link 
+                                        href="/creditlogin" 
+                                        className="block w-full py-3 bg-blue-500 text-white font-medium rounded-xl hover:bg-blue-600 transition duration-300 mt-0"
+                                    >
+                                        Kredi/Banka kartı ile devam et.
+                                        <div> (Önerilir.) </div>
+                                    </Link>
+
+                                    <Link 
+                                        href="/home" 
+                                        className="block w-full py-3 border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-100 transition duration-300"
+                                    >
+                                        Kart bilgilerini girmeden devam et.
+                                    </Link>
+
+                                    <button
+                                        className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl"
+                                        onClick={() => setGidermisin(false)}
+                                    >
+                                        ✖
+                                    </button>
+                                    </div>
+                                </>
+                                )}
+
 
                     <div className="flex flex-row my-8 justify-center items-center">
                         <button >
