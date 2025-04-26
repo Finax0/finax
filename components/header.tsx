@@ -123,7 +123,7 @@ export default function ResponsiveHeader() {
                     transition={{ duration: 0.3, delay: 0.7 }}
                     className="hidden md:flex items-center space-x-3"
                 >
-                    <Link href="/login" className="text-[#8ec291] bg-[#fbfee6] rounded-md">
+                    <Link href="/login" className="text-[#8ec291] bg-[#fbfee6] rounded-md hover:opacity-80">
                         <Button className="font-bold">Login</Button>
                     </Link>
                     <ThemeButton />
