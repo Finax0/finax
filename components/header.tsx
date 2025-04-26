@@ -1,17 +1,40 @@
 "use client"
-
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { ThemeSwitcher } from "@/components/theme-switcher"
-import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+
+import { Button } from "@/components/ui/button"
+import ThemeButton from "./theme-button"
+import { ThemeSwitcher } from "./theme-switcher"
 
 export default function ResponsiveHeader() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [isMounted, setIsMounted] = useState(false)
+    const pathname = usePathname()
 
+    const NavItem = ({ href, pathname, children }: { href: string; pathname: string; children: React.ReactNode }) => {
+        const isActive = pathname === href;
+
+        return (
+            <Link
+                href={href}
+                className={`p-1 flex items-center
+                            font-semibold
+                            transition-all text-[#fbfee6] ${isActive ? "border-b border-[#fbfee6]" : ""}
+                            
+                `}
+            >
+                <span className={`${isActive ? "" : ""}`}>
+                    {children}
+                </span>
+
+            </Link>
+        );
+    }
     // Handle scroll effect
     useEffect(() => {
         setIsMounted(true)
@@ -26,11 +49,9 @@ export default function ResponsiveHeader() {
     }, [])
 
     const navItems = [
-        { name: "Home", href: "#" },
-        { name: "Skills", href: "#skills" },
-        { name: "Experience", href: "#experience" },
-        { name: "Projects", href: "#projects" },
-        { name: "Contact", href: "#contact" },
+        { name: "Ana Sayfa", href: "/home" },
+        { name: "Tasarruflarim", href: "/savings" },
+        { name: "Yesil Puanlarim", href: "/greenpoint" },
     ]
 
     // If not mounted yet, render a simpler version to avoid hydration issues
@@ -39,10 +60,10 @@ export default function ResponsiveHeader() {
             <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="font-bold text-xl">SW</div>
+                        <div className="font-bold text-xl">Finax</div>
                         <div className="hidden md:block">
-                            <div className="font-bold">Shaquille Williams</div>
-                            <div className="text-xs text-muted-foreground">AI Engineer & Community Builder</div>
+                            <div className="font-bold">Finax</div>
+                            <div className="text-xs text-muted-foreground">Tasarruf Yap</div>
                         </div>
                     </div>
 
@@ -63,24 +84,18 @@ export default function ResponsiveHeader() {
         <header
             className={
                 `fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                ${isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"}`
+                ${isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"}`
             }
         >
-            <div className="container flex h-16 items-center justify-between px-4">
+            <div className="flex h-16 bg-[#8ec291] items-center justify-between px-4">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                     className="flex items-center gap-2"
                 >
-                    <div className="flex items-center gap-2">
-                        <div className="font-bold text-xl bg-gradient-to-r from-happy-hearts to-golden-nugget text-transparent bg-clip-text">
-                            SW
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="font-bold">Shaquille Williams</div>
-                            <div className="text-xs text-muted-foreground">AI Engineer & Community Builder</div>
-                        </div>
+                    <div className="hidden md:block">
+                        <Image src="/finax.svg" alt="Logo" width={160} height={100} className="p-2 rounded-xl bg-[#fbfee6]" />
                     </div>
                 </motion.div>
 
@@ -92,37 +107,49 @@ export default function ResponsiveHeader() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
                         >
-                            <Link
-                                href={item.href}
-                                className="relative transition-colors hover:text-primary
-                                    after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                            >
-                                {item.name}
-                            </Link>
+                            <div className="relative transition-colors hover:text-primary
+                                    after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full">
+                                <NavItem href={item.href} pathname={pathname}>
+                                    {item.name}
+                                </NavItem>
+                            </div>
                         </motion.div>
                     ))}
                 </nav>
 
-                <div className="flex items-center gap-2 sm:gap-4">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: 0.7 }}
-                    >
-                        <ThemeSwitcher />
-                    </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.7 }}
+                    className="hidden md:flex items-center space-x-3"
+                >
+                    <Link href="/login" className="text-[#8ec291] bg-[#fbfee6] rounded-md">
+                        <Button className="font-bold">Login</Button>
+                    </Link>
+                    <ThemeButton />
+                </motion.div>
 
-                    <div className="md:hidden">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.7 }}
+                    className="flex flex-row w-screen justify-between items-center space-x-3 md:hidden"
+                >
+                    <Image src="/finax.svg" alt="Logo" width={160} height={100} className="p-2 rounded-xl bg-[#fbfee6]" />
+                    <section className="flex flex-row items-center justify-between space-x-3">
+                        <Link href="/login" className="text-[#8ec291] bg-[#fbfee6] rounded-md">
+                            <Button className="font-bold">Login</Button>
+                        </Link>
                         <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                         >
-                            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                            {mobileMenuOpen ? <X color="#fbfee6" className="h-5 w-5" /> : <Menu color="#fbfee6" className="h-5 w-5" />}
                         </Button>
-                    </div>
-                </div>
+                    </section>
+                </motion.div>
             </div>
 
             <AnimatePresence>
@@ -132,7 +159,7 @@ export default function ResponsiveHeader() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden border-t overflow-hidden bg-background/95 backdrop-blur-md"
+                        className="md:hidden overflow-hidden bg-background/95 backdrop-blur-md"
                     >
                         <div className="flex flex-col space-y-3 p-4">
                             {navItems.map((item, index) => (
@@ -144,22 +171,22 @@ export default function ResponsiveHeader() {
                                 >
                                     <Link
                                         href={item.href}
-                                        className="block py-2 hover:text-primary transition-colors"
+                                        className="block py-2 text-[#80b388] hover:text-primary transition-colors"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {item.name}
                                     </Link>
                                 </motion.div>
                             ))}
-                            <div className="pt-2 border-t border-border">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-sm text-muted-foreground">Theme settings</span>
+                            <div className="pt-2 border-t border-[#80b388]">
+                                <div className="flex flex-row items-center space-x-3">
+                                    <ThemeButton />
                                 </div>
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </header >
     )
 }
