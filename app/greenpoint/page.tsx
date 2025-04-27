@@ -1,109 +1,122 @@
 'use client'
 import { useState } from "react";
-import Header from "@/components/header";
 import Leaf from "@/public/icons/leaf.svg";
-import Quest from "@/public/icons/quest-mark.svg";
+import { MessageCircleQuestionIcon, Plus } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Greenpoint() {
-  const [showInfo, setShowInfo] = useState(false);
-  const [howtoDo, sethowtoDo] = useState(false);
-  const [productInfo, setproductInfo] = useState(false); 
+    const [showInfo, setShowInfo] = useState(false);
+    const [howtoDo, sethowtoDo] = useState(false);
+    const [productInfo, setproductInfo] = useState(false);
 
-  return (
-    <main>
-      <Header />
-      <div className="h-20" />
-      <div className="box-border rounded-lg relative flex flex-col items-center justify-center border p-4">
+    return (
+        <main>
+            <div className="h-20" />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col items-center justify-center rounded-lg"
+            >
+                <section className="rounded-lg flex flex-col max-w-72 items-center justify-center border p-4">
 
-        {/* Soru işareti */}
-        <img
-          src={Quest.src}
-          alt="Quest Mark"
-          className="w-5 h-5 absolute top-2 right-2 cursor-pointer"
-          onClick={() => setShowInfo(true)}
-        />
+                    {/* Soru işareti */}
+                    <MessageCircleQuestionIcon
+                        color="#8ec291"
+                        className="w-5 h-5 flex self-end cursor-pointer"
+                        onClick={() => setShowInfo(true)}
+                    />
 
-        {/* Popup Bilgi Kutusu */}
-        {showInfo && (
-          <>
-            <div 
-              className="fixed inset-0 bg-white/50 z-40"
-              onClick={() => setShowInfo(false)} 
-            />
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border p-6 rounded-lg shadow-lg z-50 w-80 text-center">
-              <p className="text-sm mb-4">
-                🌿 Green Points, çevreci aktiviteler yaparak kazandığınız puanlardır.
-              </p>
-              <button
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl"
-                onClick={() => setShowInfo(false)}
-              >
-                ✖
-              </button>
-            </div>
-          </>
-        )}
+                    {/* Popup Bilgi Kutusu */}
+                    {showInfo && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                        >
 
-        <div className="font-bold text-center mt-2">
-          Your Green Points:
-        </div>
-        <div className="border-b-2 border-green-400 w-60 my-2"></div>
+                            <div
+                                className="fixed inset-0 bg-black/50 z-40"
+                                onClick={() => setShowInfo(false)}
+                            />
+                            <div className="fixed transition-all -translate-x-1/2 -translate-y-1/2 bg-white border p-6 rounded-lg shadow-lg z-50 w-80 text-center">
+                                <p className="text-sm mb-4">
+                                    🌿 Green Points, çevreci aktiviteler yaparak kazandığınız puanlardır.
+                                </p>
+                                <Plus
+                                    className="absolute top-2 right-2 rotate-45 cursor-pointer"
+                                    onClick={() => setShowInfo(false)}
+                                />
+                            </div>
+                        </motion.div>
+                    )}
 
-        <div className="flex items-center justify-center mt-2 space-x-2">
-          <div className="font-semibold text-lg text-center">4532</div>
-          <img src={Leaf.src} alt="Leaf Icon" className="w-5 h-5" />
-        </div>
+                    <div className="font-bold border-b-2 w-60 pb-2 text-center">
+                        Yeşil Puanlarım
+                    </div>
 
-        <div
-          className="mt-3 text-sm cursor-pointer"
-          onClick={() => sethowtoDo(true)}
-        >
-          Nasıl kazanılır?
-        </div>
+                    <div className="flex items-center justify-center mt-2 space-x-2">
+                        <div className="font-semibold text-lg text-center">4532</div>
+                        <Image src={Leaf.src} alt="Leaf Icon" width={20} height={20} />
+                    </div>
 
-        {/* Nasıl Kazanılır Popup */}
-        {howtoDo && (
-          <>
-            <div 
-              className="fixed inset-0 bg-black/50 z-40"
-              onClick={() => sethowtoDo(false)}
-            />
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border p-6 rounded-lg shadow-lg z-50 w-80 text-center">
-              <p className="font-bold mb-2">Nasıl Yeşil Puan Kazanırsın?</p>
-              <p className="text-sm">
-                Ama size bir zevki kınama ve acıyı övme şeklindeki tüm bu yanlış fikrin nasıl doğduğunu açıklamalıyım.
-              </p>
-              <button
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl"
-                onClick={() => sethowtoDo(false)}
-              >
-                ✖
-              </button>
-            </div>
-          </>
-        )}
+                    <div
+                        className="mt-3 text-sm cursor-pointer"
+                        onClick={() => sethowtoDo(true)}
+                    >
+                        Nasıl kazanılır?
+                    </div>
 
-      </div>
+                    {/* Nasıl Kazanılır Popup */}
+                    {howtoDo && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <div
+                                className="fixed inset-0 bg-black/50 z-40"
+                                onClick={() => sethowtoDo(false)}
+                            />
+                            <div className="fixed -translate-x-1/2 -translate-y-1/2 bg-white border p-6 rounded-lg shadow-lg z-50 w-80 text-center">
+                                <p className="font-bold mb-2">Nasıl Yeşil Puan Kazanırsın?</p>
+                                <p className="text-sm">
+                                    Ama size bir zevki kınama ve acıyı övme şeklindeki tüm bu yanlış fikrin nasıl doğduğunu açıklamalıyım.
+                                </p>
+                                <Plus
+                                    className="absolute top-2 right-2 rotate-45 cursor-pointer"
+                                    onClick={() => sethowtoDo(false)}
+                                />
+                            </div>
+                        </motion.div>
+                    )}
+                </section>
 
-      {/* Yeşil Ürünler Başlığı */}
-      <div className="font-bold text-center mt-5 text-xl">
-        Yeşil Ürünler:
-      </div>
+                <section className="flex flex-col rounded-lg mt-5">
+                    {/* Yeşil Ürünler Başlığı */}
+                    <div className="font-bold text-center mt-5 text-xl">
+                        Yeşil Ürünler:
+                    </div>
+                    {/* Ürünler Grid */}
+                    <div className="flex flex-wrap justify-center space-x-3 space-y-3 m-4">
+                        {Array.from({ length: 28 }).map((_, index) => (
+                            <div
+                                key={index}
+                                className="border rounded-lg p-6 flex flex-col items-center justify-center hover:shadow-md transition-all max-w-44 md:max-w-64"
+                            >
+                                <div className="font-bold">Ürün {index + 1}</div>
 
-      {/* Ürünler Grid */}
-      <div className="grid grid-cols-2 gap-4 p-4">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <div 
-            key={index}
-            className="border rounded-lg p-6 flex flex-col items-center justify-center shadow hover:shadow-md transition"
-          >
-            <div className="text-green-700 font-bold mb-2">Ürün {index + 1}</div>
+                                <p className="text-sm">Ürün açıklaması buraya gelir.</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex font-semibold w-screen justify-center items-center transition-all duration-300 hover:text-[#659678] cursor-pointer p-2">
+                        <span>Daha Fazla Yukle</span>
+                    </div>
+                </section>
+            </motion.div>
 
-            <p className="text-sm text-gray-600">Ürün açıklaması buraya gelir.</p>
-          </div>
-        ))}
-      </div>
-
-    </main>
-  );
+        </main>
+    );
 }

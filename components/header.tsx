@@ -25,7 +25,6 @@ export default function ResponsiveHeader() {
                 className={`p-1 flex items-center
                             font-semibold
                             transition-all text-[#fbfee6] ${isActive ? "border-b border-[#fbfee6]" : ""}
-                            
                 `}
             >
                 <span className={`${isActive ? "" : ""}`}>
@@ -57,10 +56,10 @@ export default function ResponsiveHeader() {
     // If not mounted yet, render a simpler version to avoid hydration issues
     if (!isMounted) {
         return (
-            <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-[#8ec291] backdrop-blur-md border-b border-border">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="font-bold text-xl">Finax</div>
+                        <div className="mx-4 text-[#fbfee6] font-bold text-xl">Finax</div>
                         <div className="hidden md:block">
                             <div className="font-bold">Finax</div>
                             <div className="text-xs text-muted-foreground">Tasarruf Yap</div>
@@ -84,10 +83,10 @@ export default function ResponsiveHeader() {
         <header
             className={
                 `fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                ${isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"}`
+                ${isScrolled ? "bg-[#8ec291]/50 backdrop-blur-md" : "bg-[#8ec291]"}`
             }
         >
-            <div className="flex h-16 bg-[#8ec291] items-center justify-between px-4">
+            <div className="flex h-16 items-center justify-between px-4">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -99,7 +98,7 @@ export default function ResponsiveHeader() {
                     </div>
                 </motion.div>
 
-                <nav className="hidden md:flex items-center gap-4 lg:gap-6 text-sm">
+                <nav className="hidden md:flex items-center gap-8 lg:gap-12 text-sm">
                     {navItems.map((item, index) => (
                         <motion.div
                             key={item.name}
@@ -132,7 +131,7 @@ export default function ResponsiveHeader() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.7 }}
+                    transition={{ duration: 0.3 }}
                     className="flex flex-row w-screen justify-between items-center space-x-3 md:hidden"
                 >
                     <Image src="/finax.svg" alt="Logo" width={160} height={100} className="p-2 rounded-xl bg-[#fbfee6]" />
@@ -159,7 +158,7 @@ export default function ResponsiveHeader() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden overflow-hidden bg-background/95 backdrop-blur-md"
+                        className="md:hidden overflow-hidden bg-background/50 backdrop-blur-md"
                     >
                         <div className="flex flex-col space-y-3 p-4">
                             {navItems.map((item, index) => (
@@ -171,14 +170,14 @@ export default function ResponsiveHeader() {
                                 >
                                     <Link
                                         href={item.href}
-                                        className="block py-2 text-[#80b388] hover:text-primary transition-colors"
+                                        className="block py-2 text-[#fbfee6] hover:text-primary transition-colors"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {item.name}
                                     </Link>
                                 </motion.div>
                             ))}
-                            <div className="pt-2 border-t border-[#80b388]">
+                            <div className="pt-2 border-t border-[#fbfee6]">
                                 <div className="flex flex-row items-center space-x-3">
                                     <ThemeButton />
                                 </div>

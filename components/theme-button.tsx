@@ -15,7 +15,7 @@ export default function ThemeButton() {
     };
 
     return (
-        <button onClick={toggleTheme} className="text-[#80b388] p-2 md:text-white ">
+        <button onClick={toggleTheme} className="text-[#fbfee6] p-2 md:text-white ">
             {theme === "light" ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
         </button>
     );
