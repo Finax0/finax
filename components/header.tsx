@@ -82,7 +82,7 @@ export default function ResponsiveHeader() {
     return (
         <header
             className={
-                `fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                `fixed top-0 left-0 right-0 z-50 transition-all duration-300
                 ${isScrolled ? "bg-[#8ec291]/50 backdrop-blur-md" : "bg-[#8ec291]"}`
             }
         >
@@ -106,8 +106,7 @@ export default function ResponsiveHeader() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
                         >
-                            <div className="relative transition-colors hover:text-primary
-                                    after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full">
+                            <div className="relative transition-colors hover:text-primary">
                                 <NavItem href={item.href} pathname={pathname}>
                                     {item.name}
                                 </NavItem>
@@ -158,7 +157,7 @@ export default function ResponsiveHeader() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden overflow-hidden bg-background/50 backdrop-blur-md"
+                        className="md:hidden overflow-hidden"
                     >
                         <div className="flex flex-col space-y-3 p-4">
                             {navItems.map((item, index) => (

@@ -2,7 +2,7 @@
 import ProgressBar from "@/components/progressBar";
 import { SavingsPageData } from "@/components/test/testResponses";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUp, CircleIcon, GithubIcon, Leaf, Menu, MenuSquareIcon, User } from "lucide-react";
+import { ArrowUp, CircleIcon, GithubIcon, Leaf, Menu, MenuSquareIcon, User, UserCheckIcon, UserPlus } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,7 +81,7 @@ export default function Savings() {
                                                                     alt="savings"
                                                                     width={100}
                                                                     height={100}
-                                                                    className={`object-cover rounded-lg ${!!item.green_footprint.green_points ? "border-4 border-[#8ec291]" : ""}`}
+                                                                    className={`object-cover aspect-square rounded-lg ${!!item.green_footprint.green_points ? "border-4 border-[#8ec291]" : ""}`}
                                                                 />
                                                             </div>
 
@@ -103,11 +103,11 @@ export default function Savings() {
                                                                     <span>{item.required_attendance}</span>
                                                                 </div>
                                                                 <div>
-                                                                    <MenuSquareIcon />
+                                                                    <UserPlus />
                                                                     <span>{item.attendances}</span>
                                                                 </div>
                                                                 <div>
-                                                                    <GithubIcon />
+                                                                    <UserCheckIcon />
                                                                     <span>{item.complements}</span>
                                                                 </div>
                                                                 <span className={`text-sm font-semibold border-b border-[#8ec291] ${!!item.green_footprint.green_points ? "" : "hidden"}`}>+{item.green_footprint.green_points + item.green_footprint.pointed_points} Green Points</span>
@@ -198,7 +198,7 @@ export default function Savings() {
                                                                     alt="savings"
                                                                     width={100}
                                                                     height={100}
-                                                                    className={`object-cover rounded-lg ${!!item.green_footprint.green_points ? "border-4 border-[#8ec291]" : ""}`} />
+                                                                    className={`object-cover aspect-square rounded-lg ${!!item.green_footprint.green_points ? "border-4 border-[#8ec291]" : ""}`} />
                                                             </div>
 
                                                             {/* Until Date */}
@@ -219,11 +219,11 @@ export default function Savings() {
                                                                     <span>{item.required_attendance}</span>
                                                                 </div>
                                                                 <div>
-                                                                    <MenuSquareIcon />
+                                                                    <UserPlus />
                                                                     <span>{item.attendances}</span>
                                                                 </div>
                                                                 <div>
-                                                                    <GithubIcon />
+                                                                    <UserCheckIcon />
                                                                     <span>{item.complements}</span>
                                                                 </div>
                                                                 <span className={`text-sm font-semibold border-b border-[#8ec291] ${!!item.green_footprint.green_points ? "" : "hidden"}`}>+{item.green_footprint.green_points + item.green_footprint.pointed_points} Green Points</span>

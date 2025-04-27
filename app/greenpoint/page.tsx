@@ -4,11 +4,13 @@ import Leaf from "@/public/icons/leaf.svg";
 import { MessageCircleQuestionIcon, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { GreenPointPage } from "@/components/test/testResponses";
 
 export default function Greenpoint() {
     const [showInfo, setShowInfo] = useState(false);
     const [howtoDo, sethowtoDo] = useState(false);
     const [productInfo, setproductInfo] = useState(false);
+    const [greenData, setGreenData] = useState(GreenPointPage)
 
     return (
         <main>
@@ -100,14 +102,14 @@ export default function Greenpoint() {
                     </div>
                     {/* Ürünler Grid */}
                     <div className="flex flex-wrap justify-center space-x-3 space-y-3 m-4">
-                        {Array.from({ length: 28 }).map((_, index) => (
+                        {greenData.data.products.map((item, index) => (
                             <div
                                 key={index}
                                 className="border rounded-lg p-6 flex flex-col items-center justify-center hover:shadow-md transition-all max-w-44 md:max-w-64"
                             >
-                                <div className="font-bold">Ürün {index + 1}</div>
+                                <div className="font-bold">{item.name}</div>
 
-                                <p className="text-sm">Ürün açıklaması buraya gelir.</p>
+                                <p className="text-sm">{item.description}</p>
                             </div>
                         ))}
                     </div>
